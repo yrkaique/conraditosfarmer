@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conradito's Farm</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+
+    <h1>Conradito's Farm</h1>
+    <p>Gerencia sua fazenda</p>
+    
+    <hr/>
+
+    <p>Você tem 💲 <strong id="textoDinheiro">0</strong></p>
+
+    <hr/>
+
+    <div class="deck">
+    
+        <div class="card">
+            <img src="http://placehold.co/100x100"/>
+            <h2 id="nomePlanta">Nome</h2>
+            <p id="tempoPlanta">Tempo restante</p>
+            <button>Colher</button>
+            <hr/>
+            <p>Compra de sementes</p>
+            <button onclick="comprar(camomila)">Camomila</button>
+            <button onclick="comprar(boldo)">Boldo</button>
+            <button>Erva-Mate</button>
+        </div>
+
+        <div class="card">
+            <img src="http://placehold.co/100x100"/>
+            <h2>Nome</h2>
+            <p>Tempo restante</p>
+            <button>Colher</button>
+            <hr/>
+            <p>Compra de sementes</p>
+            <button>Camomila</button>
+            <button>Boldo</button>
+            <button>Erva-Mate</button>
+        </div>
+
+        <div class="card">
+            <img src="http://placehold.co/100x100"/>
+            <h2>Nome</h2>
+            <p>Tempo restante</p>
+            <button>Colher</button>
+            <hr/>
+            <p>Compra de sementes</p>
+            <button>Camomila</button>
+            <button>Boldo</button>
+            <button>Erva-Mate</button>
+        </div>
+        
+        <div class="card">
+            <img src="http://placehold.co/100x100"/>
+            <h2>Nome</h2>
+            <p>Tempo restante</p>
+            <button>Colher</button>
+            <hr/>
+            <p>Compra de sementes</p>
+            <button>Camomila</button>
+            <button>Boldo</button>
+            <button>Erva-Mate</button>
+        </div>
+
+        <div class="card">
+            <img src="http://placehold.co/100x100"/>
+            <h2>Nome</h2>
+            <p>Tempo restante</p>
+            <button>Colher</button>
+            <hr/>
+            <p>Compra de sementes</p>
+            <button>Camomila</button>
+            <button>Boldo</button>
+            <button>Erva-Mate</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        let dinheiro = 0
+        addDinheiro(100)
+        timer()
+
+        let plantaComprada = null
+
+        // Objeto das plantas
+        let camomila = {
+            nome: "Camomila",
+            custo: 75,
+            recompensa: 300,
+            tempo: 10
+        }
+        let boldo = {
+            nome: "Boldo",
+            custo: 250,
+            recompensa: 825,
+            tempo: 35
+        }
+
+        function addDinheiro(valor){
+            dinheiro += valor
+            document.getElementById("textoDinheiro").innerHTML = dinheiro
+        }
+
+        function comprar(planta){
+
+            if(plantaComprada != null){
+                alert("Você não pode plantar agora...")
+                return
+            }
+
+            if(dinheiro < planta.custo){
+                alert("Dinheiro insuficiente...")
+                return
+            }
+
+            addDinheiro(-planta.custo)
+
+            plantaComprada = structuredClone(planta) // depp clone
+
+            document.getElementById("nomePlanta").innerHTML = planta.nome
+            document.getElementById("tempoPlanta").innerHTML = planta.tempo
+        }
+    
+        function atualizarPlantacao(){
+            
+        }
+
+        function timer(){
+
+            setTimeout(() => {
+                atualizarPlantacao()
+                console.log("Oi")
+                timer() //looping infinito
+            }, 1000);
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
+
