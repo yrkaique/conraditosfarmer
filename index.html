@@ -21,14 +21,14 @@
     
         <div class="card">
             <img src="http://placehold.co/100x100"/>
-            <h2 id="nomePlanta">Nome</h2>
-            <p id="tempoPlanta">Tempo restante</p>
-            <button>Colher</button>
+            <h2 id="nomePlanta">Terreno vazio</h2>
+            <p id="tempoPlanta">Plante algo...</p>
+            <button onclick="colher()">Colher</button>
             <hr/>
             <p>Compra de sementes</p>
             <button onclick="comprar(camomila)">Camomila</button>
             <button onclick="comprar(boldo)">Boldo</button>
-            <button>Erva-Mate</button>
+            <button onclick="comprar(ervaMate)">Erva-Mate</button>
         </div>
 
         <div class="card">
@@ -94,7 +94,7 @@
             nome: "Camomila",
             custo: 75,
             recompensa: 300,
-            tempo: 10
+            tempo: 2
         }
         let boldo = {
             nome: "Boldo",
@@ -102,10 +102,34 @@
             recompensa: 825,
             tempo: 35
         }
+        let ervaMate = {
+            nome: "Erva-Mate",
+            custo: 500,
+            recompensa: 1500,
+            tempo: 60
+        }
 
         function addDinheiro(valor){
             dinheiro += valor
             document.getElementById("textoDinheiro").innerHTML = dinheiro
+        }
+
+        function colher(){
+
+            if(plantaComprada == null){
+                alert("Você não tem nenhuma planta para colher...")
+                return
+            }
+
+            if(plantaComprada.tempo <= 0){
+                addDinheiro(plantaComprada.recompensa)
+                plantaComprada = null
+                document.getElementById("nomePlanta").innerHTML = "Terreno vazio"
+                document.getElementById("tempoPlanta").innerHTML = "Plante algo..."
+            }else{
+                alert("Sua planta ainda não está pronta para colher...")
+                return
+            }
         }
 
         function comprar(planta){
@@ -119,7 +143,7 @@
                 alert("Dinheiro insuficiente...")
                 return
             }
-
+                 
             addDinheiro(-planta.custo)
 
             plantaComprada = structuredClone(planta) // depp clone
@@ -129,14 +153,25 @@
         }
     
         function atualizarPlantacao(){
-            
+
+            if(plantaComprada == null){
+                return
+            }
+
+            if(plantaComprada.tempo <= 0){
+                document.getElementById("tempoPlanta").innerHTML = "Pronto para colher"
+                return
+            }
+
+            plantaComprada.tempo -= 1
+            document.getElementById("tempoPlanta").innerHTML = plantaComprada.tempo
+
         }
 
         function timer(){
 
             setTimeout(() => {
                 atualizarPlantacao()
-                console.log("Oi")
                 timer() //looping infinito
             }, 1000);
         }
